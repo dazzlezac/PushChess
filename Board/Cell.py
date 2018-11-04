@@ -1,9 +1,13 @@
 from Board import Pieces as p
+import pygame
 
 # A single cell on the board
 class Cell:
 
-    def __init__(self, piece = p.Piece()):
+    def __init__(self, colour, x, y, piece=p.Piece()):
+        self.x = x
+        self.y = y
+        self.colour = colour
         self.piece = piece
 
     # Moves the piece in the cell to the target cell
@@ -23,5 +27,10 @@ class Cell:
         else:
             return False
 
-
+    def draw(self, imgs, surface):
+        a = imgs[self.colour]
+        b = imgs[self.piece.name]
+        dest = (self.x * 100, self.y * 100)
+        surface.blit(a, dest)
+        surface.blit(b, dest)
 

@@ -1,28 +1,25 @@
-import pygame
-
 class Piece:
-    def __init__(self, team = None, name = None, range = None, moves = None):
+    def __init__(self, team=None, name=None, moves=None):
 
         self.team = team
-        self.range = range
         self.moves = moves
 
-        if (team == 1):
+        if team == 1:
             self.name = name + 'l'
-        elif (team == -1):
+        elif team == -1:
             self.name = name + 'd'
         else:
-            self.name = "00"
+            self.name = '00'
 
 
 class Pawn(Piece):
     def __init__(self, team):
-        moves = team * [
-            [1, -1],
-            [1, 0],
-            [1, 1]
+        moves = [
+            [-team*1, -team*-1],
+            [-team*1, 0],
+            [-team*1, -team*1]
         ]
-        Piece.__init__(self, team, "p", False, moves)
+        Piece.__init__(self, team, "p", moves)
 
 
 class Knight(Piece):
@@ -37,29 +34,33 @@ class Knight(Piece):
             [-2, -1],
             [-2, 1]
         ]
-        Piece.__init__(self, team, "n", False, moves)
+        Piece.__init__(self, team, "n", moves)
 
 
 class Bishop(Piece):
     def __init__(self, team):
-        moves = [
-            [1, 1],
-            [1, -1],
-            [-1, 1],
-            [-1, -1]
-        ]
-        Piece.__init__(self, team, "b", True, moves)
+        moves = []
+        for i in range(1, 7):
+            moves.extend([
+                [i*1, i*1],
+                [i*1, -i*1],
+                [-i*1, i*1],
+                [-i*1, -i*1]
+            ])
+        Piece.__init__(self, team, "b", moves)
 
 
 class Rook(Piece):
     def __init__(self, team):
-        moves = [
-            [1, 0],
-            [0, 1],
-            [-1, 0],
-            [0, -1]
-        ]
-        Piece.__init__(self, team, "r", True, moves)
+        moves = []
+        for i in range(1, 7):
+            moves.extend([
+                [i*1, i*0],
+                [i*0, i*1],
+                [-i*1, i*0],
+                [i*0, -i*1]
+            ])
+        Piece.__init__(self, team, "r", moves)
 
 
 class Queen(Piece):
@@ -74,7 +75,7 @@ class Queen(Piece):
             [-1, 0],
             [0, -1]
         ]
-        Piece.__init__(self, team, "q", False, moves)
+        Piece.__init__(self, team, "q", moves)
 
 
 class King(Piece):
@@ -89,4 +90,5 @@ class King(Piece):
             [-1, 0],
             [0, -1]
         ]
-        Piece.__init__(self, team, "k", False, moves)
+        Piece.__init__(self, team, "k", moves)
+
