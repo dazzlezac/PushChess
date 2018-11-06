@@ -3,7 +3,7 @@ import Board.Board as bd
 import Board.Pieces as ps
 import os
 import math
-
+#test
 
 def coord_convert(x, y):
     r = math.floor(y / 100)
